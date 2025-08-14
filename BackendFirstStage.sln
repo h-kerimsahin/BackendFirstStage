@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendFirstStage.Domain", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendFirstStage.Applications", "src\BackendFirstStage.Applications\BackendFirstStage.Applications.csproj", "{8227732B-D670-4216-BED0-9845CF292722}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendFirstStage.Infrastructures", "BackendFirstStage.Infrastructures\BackendFirstStage.Infrastructures.csproj", "{28BEAC88-6185-4F98-9B13-9C077493D902}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendFirstStage.Infrastructures", "src\BackendFirstStage.Infrastructures\BackendFirstStage.Infrastructures.csproj", "{28BEAC88-6185-4F98-9B13-9C077493D902}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
