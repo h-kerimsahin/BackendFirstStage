@@ -1,9 +1,11 @@
 using BackendFirstStage.Applications.Repositories;
 using BackendFirstStage.Applications.Repositories.Seedwork;
-using BackendFirstStage.Infrastructures.Repositories;
 using BackendFirstStage.Applications.Services;
-using BackendFirstStage.Infrastructures.Services;
+using BackendFirstStage.Infrastructures.Middleware;
+using BackendFirstStage.Infrastructures.Repositories;
 using BackendFirstStage.Infrastructures.Repositories.Seedwork;
+using BackendFirstStage.Infrastructures.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 // Add Database Connection
+//var connStr = Environment.GetEnvironmentVariable("MsSqlServer");
+//builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connStr));
 builder.Services.AddDatabaseConnection(builder.Configuration);
 
 // Add Repositories
@@ -32,6 +36,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Global Exception Handler Middleware
+app.UseGlobalExceptionHandler();
 
 app.UseAuthorization();
 

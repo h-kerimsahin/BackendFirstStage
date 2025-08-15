@@ -9,13 +9,8 @@ public static class DatabaseConnectionService
 {
     public static IServiceCollection AddDatabaseConnection(this IServiceCollection services, IConfiguration configuration)
     {
-        // Connection string'i environment variable'dan al fallback AppSettings'e bak
-        var connectionString = Environment.GetEnvironmentVariable("MsSqlServer")  ?? configuration.GetConnectionString("DefaultConnection");
-
-        if (string.IsNullOrEmpty(connectionString))
-        {
-            throw new InvalidOperationException("Database connection string is not configured. Please set DB_CONNECTION_STRING environment variable or add DefaultConnection to appsettings.json");
-        }
+        // Connection string'i environment variable'dan al, yoksa fallback kullan
+        var connectionString = GetConnectionString();
 
         services.AddDbContext<AppDbContext>(options =>
         {
@@ -29,5 +24,12 @@ public static class DatabaseConnectionService
         });
 
         return services;
+    }
+
+    // Design-time ve test'ler için connection string alma metodu
+    public static string GetConnectionString()
+    {
+        return Environment.GetEnvironmentVariable("MsSqlServer") 
+            ?? "Server=localhost;Database=BackendFirstStageDb;Trusted_Connection=true;TrustServerCertificate=true;MultipleActiveResultSets=true";
     }
 }

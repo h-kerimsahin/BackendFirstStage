@@ -91,8 +91,6 @@ public class ProductService : IProductService
         return products.Select(MapToProductListDto);
     }
 
-
-
     private static ProductListDto MapToProductListDto(Product product)
     {
         return new ProductListDto
