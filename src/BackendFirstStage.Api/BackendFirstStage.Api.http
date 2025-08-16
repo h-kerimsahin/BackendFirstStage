@@ -1,6 +1,141 @@
 @BackendFirstStage.Api_HostAddress = http://localhost:5114
+@ContentType = application/json
 
-GET {{BackendFirstStage.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+### ========================================
+### HOME CONTROLLER TESTS
+### ========================================
+
+### 1. Ana Sayfa (Root Path)
+GET {{BackendFirstStage.Api_HostAddress}}/
+Accept: {{ContentType}}
 
 ###
+
+### 2. Health Check
+GET {{BackendFirstStage.Api_HostAddress}}/home/health
+Accept: {{ContentType}}
+
+###
+
+### ========================================
+### PRODUCT CONTROLLER TESTS
+### ========================================
+
+### 3. Tüm Ürünleri Listele
+GET {{BackendFirstStage.Api_HostAddress}}/api/product
+Accept: {{ContentType}}
+
+###
+
+### 4. Yeni Ürün Ekle
+POST {{BackendFirstStage.Api_HostAddress}}/api/product
+Content-Type: {{ContentType}}
+
+{
+  "name": "Test Ürün 1",
+  "description": "Bu bir test ürünüdür",
+  "price": 99.99,
+  "stockQuantity": 100,
+  "imageUrl": "https://example.com/image1.jpg"
+}
+
+###
+
+### 5. Başka Bir Ürün Ekle
+POST {{BackendFirstStage.Api_HostAddress}}/api/product
+Content-Type: {{ContentType}}
+
+{
+  "name": "Test Ürün 2",
+  "description": "İkinci test ürünü",
+  "price": 149.50,
+  "stockQuantity": 50,
+  "imageUrl": "https://example.com/image2.jpg"
+}
+
+###
+
+### 6. ID ile Ürün Detay Bilgisi (ID: 1)
+GET {{BackendFirstStage.Api_HostAddress}}/api/product/1
+Accept: {{ContentType}}
+
+###
+
+### 7. ID ile Ürün Detay Bilgisi (ID: 2)
+GET {{BackendFirstStage.Api_HostAddress}}/api/product/2
+Accept: {{ContentType}}
+
+###
+
+### 8. Olmayan Ürün ID'si ile Test (ID: 999)
+GET {{BackendFirstStage.Api_HostAddress}}/api/product/999
+Accept: {{ContentType}}
+
+###
+
+### 9. Ürün Silme (ID: 2)
+DELETE {{BackendFirstStage.Api_HostAddress}}/api/product/2
+Accept: {{ContentType}}
+
+###
+
+### 10. Silinen Ürünü Tekrar Getirmeye Çalış (ID: 2)
+GET {{BackendFirstStage.Api_HostAddress}}/api/product/2
+Accept: {{ContentType}}
+
+###
+
+### ========================================
+### ERROR TEST CONTROLLER TESTS
+### ========================================
+
+### 11. NotFoundException Test
+GET {{BackendFirstStage.Api_HostAddress}}/api/errortest/not-found
+Accept: {{ContentType}}
+
+###
+
+### 12. ValidationException Test
+GET {{BackendFirstStage.Api_HostAddress}}/api/errortest/validation-error
+Accept: {{ContentType}}
+
+###
+
+### 13. Genel Exception Test
+GET {{BackendFirstStage.Api_HostAddress}}/api/errortest/general-error
+Accept: {{ContentType}}
+
+###
+
+### 14. DivideByZeroException Test
+GET {{BackendFirstStage.Api_HostAddress}}/api/errortest/divide-by-zero
+Accept: {{ContentType}}
+
+###
+
+### 15. ArgumentNullException Test
+GET {{BackendFirstStage.Api_HostAddress}}/api/errortest/argument-null
+Accept: {{ContentType}}
+
+###
+
+### ========================================
+### SWAGGER UI
+### ========================================
+
+### 16. Swagger UI'ı Aç
+GET {{BackendFirstStage.Api_HostAddress}}/swagger
+Accept: text/html
+
+###
+
+### ========================================
+### NOTLAR
+### ========================================
+# Bu dosya Visual Studio Code'da REST Client extension ile kullanılabilir
+# Her test arasında ### işareti bulunmalı
+# Host adresi projenizin çalıştığı porta göre güncellenmelidir
+# Varsayılan port: HTTP 5114, HTTPS 7153
+# Root path (/) artık çalışıyor ve API bilgilerini gösteriyor
+# Ürün ekleme testlerinden sonra silme testlerini çalıştırın
+# Error test'ler global exception handling'i test eder
